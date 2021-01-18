@@ -22,11 +22,13 @@ class AstronomyPictureOfTheDayPresenter : MvpPresenter<AstronomyPictureOfTheDayV
     lateinit var uiScheduler: Scheduler
 
     private var getAPODDisposable: Disposable? = null
+
     private var showInfo = false
     private var showWiki = false
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        viewState.init()
         loadData()
     }
 
@@ -89,7 +91,7 @@ class AstronomyPictureOfTheDayPresenter : MvpPresenter<AstronomyPictureOfTheDayV
     }
 
     fun onMenuSettingsClicked() {
-//        TODO("Not yet implemented")
+        router.navigateTo(Screens.SettingsScreen())
     }
 
     fun onWikiSearchClicked(searchText: String) {

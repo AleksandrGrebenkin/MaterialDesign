@@ -44,15 +44,10 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center" />
+                style="@style/title_text_style" />
 
             <ImageView
                 android:id="@+id/picture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/explanation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

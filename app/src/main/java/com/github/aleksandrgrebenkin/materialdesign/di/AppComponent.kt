@@ -3,6 +3,7 @@ package com.github.aleksandrgrebenkin.materialdesign.di
 import com.github.aleksandrgrebenkin.materialdesign.di.modules.*
 import com.github.aleksandrgrebenkin.materialdesign.mvp.presenter.AstronomyPictureOfTheDayPresenter
 import com.github.aleksandrgrebenkin.materialdesign.mvp.presenter.MainPresenter
+import com.github.aleksandrgrebenkin.materialdesign.mvp.presenter.SettingsPresenter
 import com.github.aleksandrgrebenkin.materialdesign.ui.activity.MainActivity
 import com.github.aleksandrgrebenkin.materialdesign.ui.fragment.AstronomyPictureOfTheDayFragment
 import dagger.Component
@@ -15,6 +16,7 @@ import javax.inject.Singleton
         AppModule::class,
         ImageModule::class,
         NavigationModule::class,
+        PreferencesModule::class,
         RepoModule::class
     ]
 )
@@ -24,4 +26,5 @@ interface AppComponent {
 
     fun inject(mainPresenter: MainPresenter)
     fun inject(astronomyPictureOfTheDayPresenter: AstronomyPictureOfTheDayPresenter)
+    fun inject(settingsPresenter: SettingsPresenter)
 }
