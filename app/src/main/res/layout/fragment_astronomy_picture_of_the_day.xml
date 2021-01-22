@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.fragment.AstronomyPictureOfTheDayFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -23,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/wiki_search_hint"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:counterEnabled="true"
                 app:counterMaxLength="15"
                 app:endIconCheckable="true"
@@ -40,31 +39,27 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <ImageView
+                android:id="@+id/picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/astronomy_picture_of_the_day" />
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/title_text_style" />
 
-            <ImageView
-                android:id="@+id/picture"
+            <TextView
+                android:id="@+id/explanation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@style/standard_text_style"
+                tools:text="text" />
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <include
-        android:id="@+id/bottom_sheet"
-        layout="@layout/bottom_sheet_layout" />
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:menu="@menu/bottom_app_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

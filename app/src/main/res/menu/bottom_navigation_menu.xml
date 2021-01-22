@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_navigation_astronomy_picture_of_the_day"
+        android:icon="@drawable/ic_milky_way"
+        android:title="@string/apod"/>
+
+    <item
+        android:id="@+id/bottom_navigation_planet_earth"
+        android:icon="@drawable/ic_planet_earth"
+        android:title="@string/earth_from_space"/>
+
+    <item
+        android:id="@+id/bottom_navigation_settings"
+        android:icon="@drawable/ic_settings_2"
+        android:title="@string/settings"/>
+
+</menu>

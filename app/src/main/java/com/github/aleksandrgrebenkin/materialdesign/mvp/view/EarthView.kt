@@ -4,6 +4,9 @@ import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
 @AddToEndSingle
-interface MainView : MvpView {
+interface EarthView : MvpView {
     fun init()
+    fun showError(text: String)
+    fun updateList()
+    fun addBottomDots(position: Int, size: Int)
 }

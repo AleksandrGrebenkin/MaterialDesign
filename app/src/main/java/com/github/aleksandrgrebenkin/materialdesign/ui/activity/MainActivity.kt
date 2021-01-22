@@ -46,7 +46,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        presenter.onViewCreated()
     }
+
 
     override fun onResumeFragments() {
         super.onResumeFragments()
@@ -56,6 +58,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onPause() {
         super.onPause()
         navigationHolder.removeNavigator()
+    }
+
+    override fun init() {
+        setBottomNavigation()
     }
 
     private fun initTheme() {
@@ -76,5 +82,29 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             }
         }
         presenter.backPressed()
+    }
+
+    private fun setBottomNavigation() {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.bottom_navigation_astronomy_picture_of_the_day -> {
+                    presenter.navigationAPODClicked()
+                    true
+                }
+                R.id.bottom_navigation_planet_earth -> {
+                    presenter.navigationPlanetEarthClicked()
+                    true
+                }
+                R.id.bottom_navigation_settings -> {
+                    presenter.navigationSettingsClicked()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.bottomNavigation.setOnNavigationItemReselectedListener {
+            return@setOnNavigationItemReselectedListener
+        }
     }
 }
