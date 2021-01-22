@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -23,6 +25,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("app.properties").newDataInputStream())
+        def nasaApiKey = properties.getProperty("NASA_API_KEY", "")
+        it.buildConfigField "String", "NASA_API_KEY", nasaApiKey
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -30,16 +40,56 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
 
+    //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
+
+    //AppCompat
     implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    //Material
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+
+    //Moxy
+    implementation "com.github.moxy-community:moxy:2.1.2"
+    implementation "com.github.moxy-community:moxy-ktx:2.1.2"
+    implementation "com.github.moxy-community:moxy-androidx:2.1.2"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "com.github.moxy-community:moxy-compiler:2.1.2"
+
+    //Cicerone
+    implementation 'ru.terrakok.cicerone:cicerone:5.1.1'
+
+    //Rx
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.6'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+
+    //Dagger
+    implementation 'com.google.dagger:dagger:2.24'
+    kapt 'com.google.dagger:dagger-compiler:2.24'
+
+    //Coil
+    implementation 'io.coil-kt:coil:0.9.2'
+
+    //JUnit
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+
+    //Espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
