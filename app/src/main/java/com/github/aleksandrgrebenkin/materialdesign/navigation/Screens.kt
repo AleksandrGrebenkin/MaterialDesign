@@ -3,7 +3,9 @@ package com.github.aleksandrgrebenkin.materialdesign.navigation
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.fragment.app.Fragment
 import com.github.aleksandrgrebenkin.materialdesign.ui.fragment.AstronomyPictureOfTheDayFragment
+import com.github.aleksandrgrebenkin.materialdesign.ui.fragment.SettingsFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class Screens {
@@ -17,7 +19,10 @@ class Screens {
                 data = Uri.parse(url)
             }
         }
+    }
 
+    class SettingsScreen() : SupportAppScreen() {
+        override fun getFragment() = SettingsFragment.newInstance()
     }
 
 

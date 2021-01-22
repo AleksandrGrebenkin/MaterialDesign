@@ -58,13 +58,6 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
-        setBottomAppBar(view)
-        setWikiSearchListener()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -82,6 +75,12 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
             R.id.settings -> presenter.onMenuSettingsClicked()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun init() {
+        view?.let { setBottomAppBar(it) }
+        setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
+        setWikiSearchListener()
     }
 
     override fun setImage(url: String) {

@@ -5,6 +5,7 @@ import moxy.viewstate.strategy.alias.AddToEndSingle
 
 @AddToEndSingle
 interface AstronomyPictureOfTheDayView : MvpView {
+    fun init()
     fun setImage(url: String)
     fun setTitle(text: String)
     fun setExplanation(text: String)

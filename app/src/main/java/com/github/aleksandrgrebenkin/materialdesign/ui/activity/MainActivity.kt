@@ -1,7 +1,10 @@
 package com.github.aleksandrgrebenkin.materialdesign.ui.activity
 
 import android.os.Bundle
+import com.github.aleksandrgrebenkin.materialdesign.R
 import com.github.aleksandrgrebenkin.materialdesign.databinding.ActivityMainBinding
+import com.github.aleksandrgrebenkin.materialdesign.mvp.model.preferences.IPreferencesManager
+import com.github.aleksandrgrebenkin.materialdesign.mvp.model.preferences.ThemePreference
 import com.github.aleksandrgrebenkin.materialdesign.mvp.presenter.MainPresenter
 import com.github.aleksandrgrebenkin.materialdesign.mvp.view.MainView
 import com.github.aleksandrgrebenkin.materialdesign.ui.App
@@ -19,6 +22,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @Inject
     lateinit var navigationHolder: NavigatorHolder
 
+    @Inject
+    lateinit var preferenceManager: IPreferencesManager
+
     private val navigator by lazy {
         SupportAppNavigator(
             this,
@@ -34,11 +40,12 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.instance.appComponent.inject(this)
+        initTheme()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        App.instance.appComponent.inject(this)
     }
 
     override fun onResumeFragments() {
@@ -49,6 +56,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onPause() {
         super.onPause()
         navigationHolder.removeNavigator()
+    }
+
+    private fun initTheme() {
+        preferenceManager.getTheme()?.let {
+            when (it) {
+                ThemePreference.LIGHT -> setTheme(R.style.Light)
+                ThemePreference.NIGHT -> setTheme(R.style.Night)
+                ThemePreference.MARS -> setTheme(R.style.Mars)
+                ThemePreference.ANDROID -> setTheme(R.style.Android)
+            }
+        }
     }
 
     override fun onBackPressed() {

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="info">Info</string>
-    <string name="wiki">Wiki</string>
-    <string name="settings">Settings</string>
-    <string name="wiki_search_hint">Find in Wiki</string>
-    <string name="wiki_search_helper_text">Search for the term in Wiki</string>
-</resources>

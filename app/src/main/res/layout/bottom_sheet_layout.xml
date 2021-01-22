@@ -17,8 +17,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        style="@style/title_text_style"
         tools:text="text" />
 
     <ScrollView
@@ -29,7 +28,7 @@
             android:id="@+id/explanation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            style="@style/standard_text_style"
             tools:text="text" />
 
     </ScrollView>
