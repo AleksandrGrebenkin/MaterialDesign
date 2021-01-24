@@ -29,9 +29,11 @@
                 app:endIconDrawable="@drawable/ic_wiki"
                 app:endIconMode="custom"
                 app:helperText="@string/wiki_search_helper_text"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_edit_text"
@@ -59,7 +61,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_wiki"
-                android:alpha="0"
+                android:alpha="0.3"
                 app:layout_constraintEnd_toEndOf="@id/picture"
                 app:layout_constraintTop_toTopOf="@id/picture"/>
 
