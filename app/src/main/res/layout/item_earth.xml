@@ -28,4 +28,16 @@
         app:layout_constraintTop_toBottomOf="@id/datetime"
         android:contentDescription="@string/earth_polychromatic_imaging_camera" />
 
+    <ImageView
+        android:id="@+id/image_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/ic_search"
+        android:alpha="0.8"
+        app:layout_constraintBottom_toBottomOf="@id/image"
+        app:layout_constraintEnd_toEndOf="@id/image"
+        app:layout_constraintStart_toStartOf="@id/image"
+        app:layout_constraintTop_toTopOf="@id/image" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

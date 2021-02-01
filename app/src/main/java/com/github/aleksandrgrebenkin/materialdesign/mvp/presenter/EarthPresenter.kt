@@ -32,11 +32,10 @@ class EarthPresenter @Inject constructor(
 
             view.setDateTime(getDateTimeString(item.date))
             view.loadImage(getImageUrl(item))
+            view.setOnClickListenerExpand()
         }
 
         override fun getCount() = earthImageList.size
-
-
     }
 
     val earthImageListPresenter = EarthListPresenter()
