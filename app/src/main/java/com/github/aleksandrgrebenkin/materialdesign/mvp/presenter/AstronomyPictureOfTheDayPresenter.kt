@@ -23,7 +23,6 @@ class AstronomyPictureOfTheDayPresenter : MvpPresenter<AstronomyPictureOfTheDayV
 
     private var getAPODDisposable: Disposable? = null
 
-    private var showInfo = false
     private var showWiki = false
 
     override fun onFirstViewAttach() {
@@ -69,15 +68,6 @@ class AstronomyPictureOfTheDayPresenter : MvpPresenter<AstronomyPictureOfTheDayV
     override fun onDestroy() {
         super.onDestroy()
         getAPODDisposable?.dispose()
-    }
-
-    fun onMenuInfoClicked() {
-        if (!showInfo) {
-            viewState.showInfoBottomSheet()
-        } else {
-            viewState.hideInfoBottomSheet()
-        }
-        showInfo = !showInfo
     }
 
     fun onMenuWikiClicked() {

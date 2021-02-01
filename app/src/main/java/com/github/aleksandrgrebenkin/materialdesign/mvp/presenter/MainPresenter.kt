@@ -19,4 +19,22 @@ class MainPresenter : MvpPresenter<MainView>() {
     fun backPressed() {
         router.exit()
     }
+
+    fun navigationAPODClicked() {
+        router.replaceScreen(Screens.AstronomyPictureOfTheDayScreen())
+    }
+
+    fun navigationPlanetEarthClicked() {
+        router.replaceScreen(Screens.EarthScreen())
+    }
+
+    fun navigationSettingsClicked() {
+        router.replaceScreen(Screens.SettingsScreen())
+    }
+
+    fun onViewCreated() {
+        viewState.init()
+    }
+
+
 }

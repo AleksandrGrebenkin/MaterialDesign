@@ -1,46 +1,44 @@
 package com.github.aleksandrgrebenkin.materialdesign.di.modules
 
-import com.github.aleksandrgrebenkin.materialdesign.mvp.model.api.IAstronomyPictureOfTheDayAPI
+import com.github.aleksandrgrebenkin.materialdesign.mvp.model.api.IEarthPolychromaticImagingCameraAPI
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class ApiModule {
+class EPICModule {
 
     @Singleton
-    @Named("apodUrl")
+    @Named("EPIC")
     @Provides
-    fun apodUrl() = "https://api.nasa.gov/planetary/"
+    fun epicUrl() = "https://api.nasa.gov/EPIC/"
 
     @Singleton
     @Provides
-    fun apodApi(
-        @Named("apodUrl") apodUrl: String,
-        gson: Gson,
-        client: OkHttpClient
-    ): IAstronomyPictureOfTheDayAPI =
+    fun epicApi(
+        @Named("EPIC") url: String,
+        @Named("EPIC") gson: Gson,
+        @Named("EPIC") client: OkHttpClient
+    ): IEarthPolychromaticImagingCameraAPI =
         Retrofit.Builder()
-            .baseUrl(apodUrl)
+            .baseUrl(url)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
-            .create(IAstronomyPictureOfTheDayAPI::class.java)
+            .create(IEarthPolychromaticImagingCameraAPI::class.java)
 
     @Singleton
+    @Named("EPIC")
     @Provides
     fun gson(): Gson = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -48,16 +46,11 @@ class ApiModule {
         .create()
 
     @Singleton
+    @Named("EPIC")
     @Provides
-    fun apodOkHttpClient(apodInterceptor: APODInterceptor): OkHttpClient =
+    fun okHttpClient(): OkHttpClient =
         OkHttpClient.Builder()
-            .addInterceptor(apodInterceptor)
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
-    
-    class APODInterceptor @Inject constructor(): Interceptor {
-        override fun intercept(chain: Interceptor.Chain): Response {
-            return chain.proceed(chain.request())
-        }
-    }
+
 }

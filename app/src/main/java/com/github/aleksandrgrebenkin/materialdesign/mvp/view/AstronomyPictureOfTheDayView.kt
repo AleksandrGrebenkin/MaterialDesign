@@ -10,8 +10,6 @@ interface AstronomyPictureOfTheDayView : MvpView {
     fun setTitle(text: String)
     fun setExplanation(text: String)
     fun showError(text: String)
-    fun showInfoBottomSheet()
-    fun hideInfoBottomSheet()
     fun showWikiSearch()
     fun hideWikiSearch()
     fun setWikiSearchTextEmpty()

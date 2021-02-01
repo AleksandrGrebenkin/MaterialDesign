@@ -68,18 +68,15 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
         inflater.inflate(R.menu.bottom_app_bar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.info -> presenter.onMenuInfoClicked()
-            R.id.wiki -> presenter.onMenuWikiClicked()
-            R.id.settings -> presenter.onMenuSettingsClicked()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.wiki -> presenter.onMenuWikiClicked()
+//            R.id.settings -> presenter.onMenuSettingsClicked()
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     override fun init() {
-        view?.let { setBottomAppBar(it) }
-        setBottomSheetBehavior(binding.bottomSheet.bottomSheetContainer)
         setWikiSearchListener()
     }
 
@@ -89,27 +86,15 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
 
     override fun setTitle(text: String) {
         binding.title.text = text
-        binding.bottomSheet.title.text = text
     }
 
     override fun setExplanation(text: String) {
-//        binding.explanation.text = text
-        binding.bottomSheet.explanation.text = text
+        binding.explanation.text = text
     }
 
     override fun showError(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
         Log.e("MY_ERROR", text)
-    }
-
-    override fun showInfoBottomSheet() {
-        bottomSheetBehavior.isHideable = false
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-    }
-
-    override fun hideInfoBottomSheet() {
-        bottomSheetBehavior.isHideable = true
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     override fun showWikiSearch() {
@@ -122,18 +107,6 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
 
     override fun setWikiSearchTextEmpty() {
         binding.inputEditText.text = null
-    }
-
-    private fun setBottomSheetBehavior(bottomSheet: LinearLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.isHideable = true
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-    }
-
-    private fun setBottomAppBar(view: View) {
-        val context = activity as MainActivity
-        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
-        setHasOptionsMenu(true)
     }
 
     private fun setWikiSearchListener() {
