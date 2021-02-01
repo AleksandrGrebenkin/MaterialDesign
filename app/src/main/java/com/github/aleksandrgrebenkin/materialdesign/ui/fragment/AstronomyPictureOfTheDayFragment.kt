@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.github.aleksandrgrebenkin.materialdesign.R
 import com.github.aleksandrgrebenkin.materialdesign.databinding.FragmentAstronomyPictureOfTheDayBinding
+import com.github.aleksandrgrebenkin.materialdesign.databinding.FragmentAstronomyPictureOfTheDayStartBinding
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.image.IImageLoader
 import com.github.aleksandrgrebenkin.materialdesign.mvp.presenter.AstronomyPictureOfTheDayPresenter
 import com.github.aleksandrgrebenkin.materialdesign.mvp.view.AstronomyPictureOfTheDayView
@@ -31,7 +32,7 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
     @Inject
     lateinit var imageLoader: IImageLoader<ImageView>
 
-    private var _binding: FragmentAstronomyPictureOfTheDayBinding? = null
+    private var _binding: FragmentAstronomyPictureOfTheDayStartBinding? = null
     private val binding
         get() = _binding!!
 
@@ -53,7 +54,7 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAstronomyPictureOfTheDayBinding.inflate(inflater, container, false)
+        _binding = FragmentAstronomyPictureOfTheDayStartBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
