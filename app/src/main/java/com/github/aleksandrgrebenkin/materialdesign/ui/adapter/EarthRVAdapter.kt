@@ -5,6 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.github.aleksandrgrebenkin.materialdesign.databinding.ItemEarthBinding
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.image.IImageLoader
 import com.github.aleksandrgrebenkin.materialdesign.mvp.presenter.list.IEarthListPresenter
@@ -12,7 +16,7 @@ import com.github.aleksandrgrebenkin.materialdesign.mvp.view.list.EarthItemView
 import kotlinx.android.extensions.LayoutContainer
 import javax.inject.Inject
 
-class EarthRVAdapter (
+class EarthRVAdapter(
     private val presenter: IEarthListPresenter
 ) : RecyclerView.Adapter<EarthRVAdapter.ViewHolder>() {
 
@@ -38,12 +42,36 @@ class EarthRVAdapter (
         override val containerView = binding.root
         override var pos = -1
 
+        private var isExpand = false
+
         override fun setDateTime(text: String) {
             binding.datetime.text = text
         }
 
         override fun loadImage(url: String) {
             imageLoader.loadInto(url, binding.image)
+        }
+
+        override fun setOnClickListenerExpand() {
+            binding.image.setOnClickListener {
+                isExpand = !isExpand
+                TransitionManager.beginDelayedTransition(
+                    binding.root, TransitionSet()
+                        .addTransition(ChangeBounds())
+                        .addTransition(ChangeImageTransform())
+                )
+
+                binding.imageSearch.animate()
+                    .alpha(if (isExpand) 0f else 1f)
+                    .duration = 300
+
+                val params: ViewGroup.LayoutParams = binding.image.layoutParams
+                params.height =
+                    if (isExpand) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+                binding.image.layoutParams = params
+                binding.image.scaleType =
+                    if (isExpand) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
+            }
         }
     }
 }
