@@ -32,6 +32,10 @@ class MainPresenter : MvpPresenter<MainView>() {
         router.replaceScreen(Screens.SettingsScreen())
     }
 
+    fun navigationNotesClicked() {
+        router.replaceScreen(Screens.NotesScreen())
+    }
+
     fun onViewCreated() {
         viewState.init()
     }

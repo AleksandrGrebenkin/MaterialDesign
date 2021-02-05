@@ -99,6 +99,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                     presenter.navigationSettingsClicked()
                     true
                 }
+                R.id.bottom_navigation_notes -> {
+                    presenter.navigationNotesClicked()
+                    true
+                }
                 else -> false
             }
         }
