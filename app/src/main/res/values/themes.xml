@@ -58,4 +58,8 @@
         <!-- Customize your theme here. -->
         <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
     </style>
+
+    <style name="Android.Splash">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
+    </style>
 </resources>
