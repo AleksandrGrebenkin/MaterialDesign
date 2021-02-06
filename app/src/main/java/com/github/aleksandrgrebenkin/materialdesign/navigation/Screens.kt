@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.fragment.app.Fragment
 import com.github.aleksandrgrebenkin.materialdesign.ui.fragment.AstronomyPictureOfTheDayFragment
 import com.github.aleksandrgrebenkin.materialdesign.ui.fragment.EarthFragment
+import com.github.aleksandrgrebenkin.materialdesign.ui.fragment.NotesFragment
 import com.github.aleksandrgrebenkin.materialdesign.ui.fragment.SettingsFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
@@ -28,6 +29,10 @@ class Screens {
 
     class SettingsScreen() : SupportAppScreen() {
         override fun getFragment() = SettingsFragment.newInstance()
+    }
+
+    class NotesScreen(): SupportAppScreen() {
+        override fun getFragment() = NotesFragment.newInstance()
     }
 
 

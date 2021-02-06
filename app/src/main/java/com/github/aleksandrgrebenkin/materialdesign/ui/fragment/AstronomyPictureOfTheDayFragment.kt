@@ -1,23 +1,28 @@
 package com.github.aleksandrgrebenkin.materialdesign.ui.fragment
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.github.aleksandrgrebenkin.materialdesign.R
-import com.github.aleksandrgrebenkin.materialdesign.databinding.FragmentAstronomyPictureOfTheDayBinding
 import com.github.aleksandrgrebenkin.materialdesign.databinding.FragmentAstronomyPictureOfTheDayStartBinding
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.image.IImageLoader
 import com.github.aleksandrgrebenkin.materialdesign.mvp.presenter.AstronomyPictureOfTheDayPresenter
 import com.github.aleksandrgrebenkin.materialdesign.mvp.view.AstronomyPictureOfTheDayView
 import com.github.aleksandrgrebenkin.materialdesign.ui.App
 import com.github.aleksandrgrebenkin.materialdesign.ui.BackButtonListener
-import com.github.aleksandrgrebenkin.materialdesign.ui.activity.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 
@@ -55,8 +60,13 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAstronomyPictureOfTheDayStartBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.explanation.typeface =
+            Typeface.createFromAsset(context?.assets, "fonts/HaeresletterRegular.otf")
     }
 
     override fun onDestroyView() {
@@ -68,14 +78,6 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.bottom_app_bar, menu)
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.wiki -> presenter.onMenuWikiClicked()
-//            R.id.settings -> presenter.onMenuSettingsClicked()
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     override fun init() {
         setWikiSearchListener()
@@ -90,7 +92,23 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
     }
 
     override fun setExplanation(text: String) {
-        binding.explanation.text = text
+        val spannableText = SpannableString(text)
+        var startIndex = 0
+        var endIndex = 0
+        val spannableFilter = listOf("sky", "night", "star", "stars")
+        val endOfWordFilter = listOf(" ", ".", ",", "!", "?")
+        while (true) {
+            startIndex = spannableText.indexOfAny(spannableFilter, endIndex, true)
+            if (startIndex < 0) break
+            endIndex = spannableText.indexOfAny(endOfWordFilter, startIndex, true)
+            spannableText.setSpan(
+                ForegroundColorSpan(Color.RED),
+                startIndex,
+                endIndex,
+                Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+            )
+        }
+        binding.explanation.text = spannableText
     }
 
     override fun showError(text: String) {

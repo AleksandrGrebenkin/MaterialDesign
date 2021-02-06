@@ -1,7 +1,5 @@
 package com.github.aleksandrgrebenkin.materialdesign.ui.fragment
 
-import android.content.res.Resources
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -10,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.github.aleksandrgrebenkin.materialdesign.R
 import com.github.aleksandrgrebenkin.materialdesign.databinding.FragmentEarthBinding
@@ -23,7 +19,6 @@ import com.github.aleksandrgrebenkin.materialdesign.ui.adapter.EarthRVAdapter
 import com.github.aleksandrgrebenkin.materialdesign.ui.common.getColorResCompat
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import java.text.FieldPosition
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -56,8 +51,7 @@ class EarthFragment : MvpAppCompatFragment(), EarthView, BackButtonListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEarthBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {

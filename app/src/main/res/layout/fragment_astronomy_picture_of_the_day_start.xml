@@ -69,6 +69,7 @@
                 android:id="@+id/title"
                 style="@style/title_text_style"
                 android:layout_width="0dp"
+                android:fontFamily="@font/aldrich"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
