@@ -2,8 +2,10 @@ package com.github.aleksandrgrebenkin.materialdesign.di.modules
 
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.api.IAstronomyPictureOfTheDayAPI
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.api.IEarthPolychromaticImagingCameraAPI
+import com.github.aleksandrgrebenkin.materialdesign.mvp.model.repo.HardcodeNoteRepo
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.repo.IAstronomyPictureOfTheDayRepo
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.repo.IEarthPolychromaticImagingCameraRepo
+import com.github.aleksandrgrebenkin.materialdesign.mvp.model.repo.INoteRepo
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.repo.retrofit.RetrofitAstronomyPictureOfTheDayRepo
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.repo.retrofit.RetrofitEarthPolychromaticImagingCameraRepo
 import dagger.Module
@@ -26,4 +28,8 @@ class RepoModule {
         api: IEarthPolychromaticImagingCameraAPI
     ): IEarthPolychromaticImagingCameraRepo =
         RetrofitEarthPolychromaticImagingCameraRepo(api)
+
+    @Singleton
+    @Provides
+    fun noteRepo(): INoteRepo = HardcodeNoteRepo()
 }

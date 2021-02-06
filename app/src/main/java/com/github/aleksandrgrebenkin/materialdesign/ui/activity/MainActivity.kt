@@ -72,7 +72,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 ThemePreference.MARS -> setTheme(R.style.Mars)
                 ThemePreference.ANDROID -> setTheme(R.style.Android)
             }
-        }
+        } ?: setTheme(R.style.Android)
     }
 
     override fun onBackPressed() {
@@ -97,6 +97,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 }
                 R.id.bottom_navigation_settings -> {
                     presenter.navigationSettingsClicked()
+                    true
+                }
+                R.id.bottom_navigation_notes -> {
+                    presenter.navigationNotesClicked()
                     true
                 }
                 else -> false

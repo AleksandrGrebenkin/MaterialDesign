@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@layout/item_note_expanded"
+        app:constraintSetStart="@layout/item_note"
+        app:duration="300">
+
+        <OnClick app:targetId="@+id/card_container" />
+    </Transition>
+</MotionScene>
