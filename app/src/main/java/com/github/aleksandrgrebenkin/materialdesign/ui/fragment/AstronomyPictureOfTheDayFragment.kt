@@ -1,6 +1,12 @@
 package com.github.aleksandrgrebenkin.materialdesign.ui.fragment
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
@@ -16,6 +22,7 @@ import com.github.aleksandrgrebenkin.materialdesign.ui.BackButtonListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 
@@ -56,6 +63,12 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.explanation.typeface =
+            Typeface.createFromAsset(context?.assets, "fonts/HaeresletterRegular.otf")
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -79,7 +92,23 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
     }
 
     override fun setExplanation(text: String) {
-        binding.explanation.text = text
+        val spannableText = SpannableString(text)
+        var startIndex = 0
+        var endIndex = 0
+        val spannableFilter = listOf("sky", "night", "star", "stars")
+        val endOfWordFilter = listOf(" ", ".", ",", "!", "?")
+        while (true) {
+            startIndex = spannableText.indexOfAny(spannableFilter, endIndex, true)
+            if (startIndex < 0) break
+            endIndex = spannableText.indexOfAny(endOfWordFilter, startIndex, true)
+            spannableText.setSpan(
+                ForegroundColorSpan(Color.RED),
+                startIndex,
+                endIndex,
+                Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+            )
+        }
+        binding.explanation.text = spannableText
     }
 
     override fun showError(text: String) {

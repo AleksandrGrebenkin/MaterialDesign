@@ -9,13 +9,14 @@
         android:id="@+id/datetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/aldrich"
+        android:textSize="@dimen/title_text_size"
         app:layout_constraintBottom_toTopOf="@id/image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="@dimen/title_text_size"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Some Date"/>
+        tools:text="Some Date" />
 
     <ImageView
         android:id="@+id/image"
