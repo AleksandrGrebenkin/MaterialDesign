@@ -7,14 +7,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.github.aleksandrgrebenkin.materialdesign.R
-import com.github.aleksandrgrebenkin.materialdesign.databinding.FragmentAstronomyPictureOfTheDayBinding
 import com.github.aleksandrgrebenkin.materialdesign.databinding.FragmentAstronomyPictureOfTheDayStartBinding
 import com.github.aleksandrgrebenkin.materialdesign.mvp.model.image.IImageLoader
 import com.github.aleksandrgrebenkin.materialdesign.mvp.presenter.AstronomyPictureOfTheDayPresenter
 import com.github.aleksandrgrebenkin.materialdesign.mvp.view.AstronomyPictureOfTheDayView
 import com.github.aleksandrgrebenkin.materialdesign.ui.App
 import com.github.aleksandrgrebenkin.materialdesign.ui.BackButtonListener
-import com.github.aleksandrgrebenkin.materialdesign.ui.activity.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -55,8 +53,7 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAstronomyPictureOfTheDayStartBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -68,14 +65,6 @@ class AstronomyPictureOfTheDayFragment : MvpAppCompatFragment(),
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.bottom_app_bar, menu)
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.wiki -> presenter.onMenuWikiClicked()
-//            R.id.settings -> presenter.onMenuSettingsClicked()
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     override fun init() {
         setWikiSearchListener()
